@@ -3,55 +3,30 @@
 // DOM: enlaces y variables globales
 const categorias = [];
 const carrito = [];
+const producto = [];
 
 const container = document.querySelector("div.card-container");
 const buttonCarrito = document.querySelector("div.shoping-cart");
+
 const inputSearch = document.querySelector("input#inputSearch");
 const seccionCategorias = document.querySelector("article.categories");
 
 // LÓGICA
-
-// function crearCardHTML(producto) {
-//     return `
-//     <div class="max-w-xs rounded overflow-hidden shadow-lg bg-white">
-//         <img class="w-full h-48 object-contain bg-white p-4" src="${producto.image}" alt="${producto.title}">
-//         <div class="px-6 py-4">
-//             <div class="font-bold text-xl mb-2">${producto.title}</div>
-//             <p class="text-gray-700 text-base">
-//                 ${producto.description.substring(0, 100)}...
-//             </p>
-//         </div>
-//         <div class="px-6 pt-4 pb-2">
-//             <span class="inline-block bg-green-100 rounded-full px-3 py-1 text-sm font-semibold text-green-800 mr-2 mb-2">
-//                 $${producto.price}
-//             </span>
-//             <span class="inline-block bg-blue-100 rounded-full px-3 py-1 text-sm font-semibold text-blue-800 mr-2 mb-2">
-//                 ${producto.category}
-//             </span>
-//         </div>
-//         <div class="px-6 pb-4 text-center">
-//             <button id="buttonComprar" data-codigo="${producto.id}" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-//                 COMPRAR
-//             </button>
-//         </div>
-//     </div>`;
-// }
-
 function crearCardHTML(producto) {
-    const productoStr = encodeURIComponent(JSON.stringify(producto));
+    const card = document.createElement('div');
+    card.className = 'w-full max-w-xs rounded overflow-hidden shadow-lg bg-white cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl';
 
-    return `
-    <div 
-        class="w-full max-w-xs rounded overflow-hidden shadow-lg bg-white cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl" 
-        onclick="abrirModal('${productoStr}')"
-    >
+    card.innerHTML = `
         <img class="w-full h-48 object-contain bg-white p-4" src="${producto.image}" alt="${producto.title}">
         <div class="px-6 py-4">
             <div class="font-normal text-l text-center">${producto.title}</div>
         </div>
-    </div>`;
-}
+    `;
 
+    card.addEventListener('click', () => abrirModal(producto));
+
+    return card;
+}
 
 function agregarProductos() {
     fetch(`https://fakestoreapi.com/products`)
@@ -60,62 +35,64 @@ function agregarProductos() {
             container.innerHTML = "";
 
             productos.forEach(producto => {
-                const cardHTML = crearCardHTML(producto);
-                container.innerHTML += cardHTML;
+                const cardHTML = crearCardHTML(producto); // Devuelve un nodo DOM
+                container.appendChild(cardHTML); // Lo agrega correctamente al DOM
             });
         })
         .catch((error) => console.error("Error al cargar los productos:", error));
 }
 
-// function abrirModal(producto) {
-//     const prod = typeof producto === "string" ? JSON.parse(decodeURIComponent(producto)) : producto;
-
-//     document.getElementById("modal-title").textContent = prod.title;
-//     document.getElementById("modal-price").textContent = `$${prod.price}`;
-//     document.getElementById("modal-description").textContent = prod.description;
-//     document.getElementById("modal-image").src = prod.image;
-
-//     document.getElementById("producto-modal-backdrop").classList.remove("hidden");
-// }
-
 
 function abrirModal(producto) {
-    const prod = typeof producto === "string" ? JSON.parse(decodeURIComponent(producto)) : producto;
-
-    // // Si ya existe un modal abierto, lo eliminamos primero
-    // const modalExistente = document.getElementById("producto-modal-backdrop");
-    // if (modalExistente) {
-    //     modalExistente.remove();
-    // }
-
-    // Crear el contenedor del modal
-    const modalHTML = `
-    <div id="producto-modal-backdrop" class="fixed inset-0 z-[999] grid place-items-center bg-black bg-opacity-60 backdrop-blur-sm transition-opacity duration-300">
-        <div class="relative w-11/12 max-w-md rounded-lg bg-white shadow-sm p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <h5 class="text-xl font-medium text-slate-800">${prod.title}</h5>
-                    <p class="text-green-600 font-bold text-lg mt-1">$${prod.price}</p>
-                </div>
-                <button onclick="cerrarModal()" class="text-gray-500 hover:bg-gray-100 rounded-full p-2">✖</button>
-            </div>
-            <img class="w-full h-64 object-contain my-4" src="${prod.image}" />
-            <p class="text-slate-600 text-sm">${prod.description}</p>
-            <div class="mt-6 text-right">
-                <button class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded">
-                    Agregar al carrito
-                </button>
-            </div>
-        </div>
-    </div>
-    `;
-
-    // Insertar el modal en el body
-    document.body.insertAdjacentHTML("beforeend", modalHTML);
+    // Insertar datos dinámicos
+    document.getElementById('modal-title').textContent = producto.title;
+    document.getElementById('modal-description').textContent = producto.description;
+    document.getElementById('modal-image').src = producto.image;
+    document.getElementById('modal-image').alt = producto.title;
+    document.getElementById('modal-price').textContent = producto.price;
+    
+    // Mostrar modal y backdrop
+    document.getElementById('modal-producto').classList.remove('hidden');
 }
 
 function cerrarModal() {
-    document.getElementById("producto-modal-backdrop").classList.add("hidden");
+    // Ocultar modal y backdrop
+    document.getElementById('modal-producto').classList.add('hidden');
+}
+
+
+function agregarAlCarrito(titulo, precio, imagen) {
+    // Asignar los valores del producto a la variable global
+    productoLocal = {
+        imagen: imagen,
+        titulo: titulo,
+        precio: precio,
+    };
+    console.log(productoLocal)
+
+    // Actualizar el contenido del modal con la información del producto
+    // document.getElementById('modal-title').innerText = titulo;
+    // document.getElementById('modal-price').innerText = precio;
+    // document.getElementById('modal-description').innerText = descripcion;
+
+    // Obtener el carrito actual del localStorage (si existe)
+    let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+
+    // Verificar si el producto ya está en el carrito
+    // const productoExistente = carrito.find(item => item.titulo === producto.titulo);
+    carrito.push(productoLocal);
+    localStorage.setItem('carrito', JSON.stringify(carrito));  // Guardamos el carrito en el localStorage
+    cerrarModal();
+
+//     if (productoExistente) {
+//         // Si el producto ya está, no lo agregamos de nuevo (o puedes incrementar su cantidad si lo deseas)
+//         alert('Este producto ya está en tu carrito');
+//     } else {
+//         // Si no está, lo agregamos al carrito
+//         localStorage.setItem('carrito', JSON.stringify(carrito));  // Guardamos el carrito en el localStorage
+//         alert('Producto agregado al carrito');
+//     }
+// }
 }
 
 
