@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Trigger Modal</title>
+</head>
+<body>
+<script>
+  window.onload = function() {
+    // Open the main page
+    window.location.href = "index.html";
+
+    // After a delay, trigger the modal
+    setTimeout(function() {
+      const button = document.querySelector('.view-details-btn[data-product-id="1"]');
+      if (button) {
+        button.click();
+      } else {
+        console.error('Button not found');
+      }
+    }, 1000);
+  };
+</script>
+</body>
+</html>
