@@ -157,4 +157,46 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   fetchProducts();
+
+  // Finalizar Compra button functionality
+  const finalizarCompraBtn = document.getElementById('finalizar-compra-btn');
+  if (finalizarCompraBtn) {
+    finalizarCompraBtn.addEventListener('click', finalizarCompra);
+  }
+
+  function finalizarCompra() {
+    localStorage.removeItem('cart');
+    cartItemsContainer.innerHTML = '<p>No items in cart.</p>';
+    alert('Compra finalizada! Gracias por su compra.');
+  }
+
+  // Eliminar Carrito button functionality
+  const eliminarCarritoBtn = document.getElementById('eliminar-carrito-btn');
+  if (eliminarCarritoBtn) {
+    eliminarCarritoBtn.addEventListener('click', eliminarCarrito);
+  }
+
+  function eliminarCarrito() {
+    localStorage.removeItem('cart');
+    cartItemsContainer.innerHTML = '<p>No items in cart.</p>';
+  }
+
+  // Search functionality
+  const searchInput = document.getElementById('inputSearch');
+  searchInput.addEventListener('input', searchProducts);
+
+  function searchProducts() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const productsContainer = document.getElementById('products-container');
+    const productCards = productsContainer.querySelectorAll('.product-card');
+
+    productCards.forEach(card => {
+      const title = card.querySelector('h3').textContent.toLowerCase();
+      if (title.includes(searchTerm)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
 });
