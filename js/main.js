@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${product.image}" alt="${product.title}">
         <h3>${product.title}</h3>
         <p>$${product.price}</p>
-        <button class="view-details-btn" data-product-id="${product.id}">View Details</button>
+        <button class="view-details-btn" data-product-id="${product.id}">Detalle</button>
       `;
       productsContainer.appendChild(card);
     });
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <img src="${product.image}" alt="${product.title}">
         <p>Price: $${product.price}</p>
         <p>${product.description}</p>
-        <button class="add-to-cart-btn" data-product-id="${product.id}">Add to Cart</button>
+        <button class="add-to-cart-btn" data-product-id="${product.id}">Agregar al carrito</button>
       </div>
     `;
     document.body.appendChild(modal);
@@ -117,8 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
           <span class="quantity">${product.quantity || 1}</span>
           <button class="increment-btn" data-product-id="${product.id}">+</button>
         </div>
-        <p class="final-price">Price: $${product.price * (product.quantity || 1)}</p>
-        <button class="delete-btn" data-product-id="${product.id}">Delete</button>
+        <p class="final-price">Precio: $${product.price * (product.quantity || 1)}</p>
+        <button class="delete-btn" data-product-id="${product.id}">Eliminar</button>
       `;
       cartItemsContainer.appendChild(cartItem);
     });
