@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('cart', JSON.stringify(cart));
     displayCartItems();
     updateCartTotal();
-    alert('Product added to cart!');
+    alert('Producto agregado al carrito!');
   };
 
   const cartIcon = document.getElementById('cart-icon');
