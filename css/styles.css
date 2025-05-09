@@ -7,7 +7,7 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Product Cards */
+
 #products-container {
   display: flex;
   flex-wrap: wrap;
@@ -16,31 +16,31 @@ body {
 }
 
 .product-card {
-     background-color: #fff;           /* Fondo blanco */
+     background-color: #fff;
        border: 1px solid #ccc;
-  border-radius: 12px;              /* Bordes redondeados */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  border-radius: 12px; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   
   width: 200px;
-  height: 300px; /* Set a fixed height for all cards */
+  height: 300px;
   border: 1px solid #ccc;
   padding: 10px;
   margin: 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribute content vertically */
+  justify-content: space-between;
 }
 
 .product-card img {
   max-width: 75%;
-  height: 150px; /* Set a fixed height for all images */
-  object-fit: contain; /* Ensure images fit within the container */
+  height: 150px;
+  object-fit: contain; 
   display: block;
   margin: 0 auto;
 }
 
-/* Product Modal */
+
 .product-modal {
   position: fixed;
   top: 0;
@@ -59,18 +59,21 @@ body {
   border-radius: 5px;
   text-align: center;
   position: relative;
-  max-width: 50%;       /* Responsive width */
+  max-width: 50%;
   width: 100%;
-  max-height: 90vh;     /* Ensure it doesn’t exceed 90% of viewport height */
-  overflow-y: auto;     /* Scroll inside modal if content is too tall */
-  margin: 5vh auto;     /* Vertically center with spacing from top/bottom */
+  max-height: 90vh;
+  overflow-y: auto;
+  margin: 5vh auto;    
   box-sizing: border-box;
 }
 
 .modal-content img {
   max-width: 25%;
   max-height: 25%;
-  text-align: center;
+  text-align: right;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .modal-content p {
@@ -95,16 +98,16 @@ body {
   cursor: pointer;
 }
 
-/* Cart Sidebar */
+
 .cart-sidebar {
   position: fixed;
-  top: 20px; /* Simulate top margin */
-  bottom: 20px; /* Simulate bottom margin */
+  top: 20px;
+  bottom: 20px;
   right: 0;
   width: 320px;
-  height: calc(100% - 40px); /* Account for top + bottom spacing */
+  height: calc(100% - 40px); 
   background-color: whitesmoke;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.25); /* Heavier shadow */
+  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.25);
   padding: 20px;
   overflow-y: auto;
   border-top-left-radius: 12px;
@@ -141,25 +144,12 @@ body {
   gap: 10px;
   margin-bottom: 15px;
   padding: 10px;
-  border: 1px solid #ddd; /* Added full border */
-  border-bottom: 1px solid #ccc; /* Optional: make bottom border more prominent */
+  border: 1px solid #ddd;
+  border-bottom: 1px solid #ccc;
   background-color: white;
   border-radius: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08); /* Added subtle shadow */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
-/* 
-.cart-item {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 15px;
-    padding: 10px;
-    border-bottom: 1px solid #eee;
-    background-color: #f9f9f9;
-    border-radius: 6px;
-  }   */
 
 .cart-item img {
   width: 50px;
@@ -224,7 +214,7 @@ body {
 .final-price {
   margin-left: auto;
   margin-right: 10px;
-  white-space: nowrap; /* Prevent price from wrapping */
+  white-space: nowrap;
 }
 
 .delete-btn {
@@ -354,7 +344,7 @@ body {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    /* input[type="search"]:hover, */
+ 
     & input[type="search"]:focus {
         background: #ffffff;
     }
@@ -575,7 +565,7 @@ article {
 table {
     padding-top: 20px;
     border-collapse: collapse;
-    /* max-width: 600px; */
+
     
     & thead tr {
         background-color: #333;
@@ -988,7 +978,20 @@ button:disabled:active {
     
   .modal-content {
     max-width: 90%;
+      height: auto;
+  display: block;
+  margin: 0 auto;
   }
+
+  .modal-content img {
+
+
+
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto; 
+}
 
     .card {
         width: 90%;
