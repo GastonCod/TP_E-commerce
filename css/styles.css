@@ -59,7 +59,7 @@ body {
   border-radius: 5px;
   text-align: center;
   position: relative;
-  max-width: 90%;       /* Responsive width */
+  max-width: 50%;       /* Responsive width */
   width: 100%;
   max-height: 90vh;     /* Ensure it doesn’t exceed 90% of viewport height */
   overflow-y: auto;     /* Scroll inside modal if content is too tall */
@@ -984,6 +984,11 @@ button:disabled:active {
         padding-right: 10%;
         padding-left: 10%;    
     }
+
+    
+  .modal-content {
+    max-width: 90%;
+  }
 
     .card {
         width: 90%;
