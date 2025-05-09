@@ -1,6 +1,15 @@
+/**
+ * Script principal de la tienda en línea.
+ * Gestiona la visualización de productos, el carrito de compras, y la búsqueda.
+ */
+
 document.addEventListener('DOMContentLoaded', () => {
   const productsContainer = document.getElementById('products-container');
 
+    /**
+   * Obtiene los productos desde la API y los muestra en la página.
+   * @async
+   */
   const fetchProducts = async () => {
     try {
       const response = await fetch('https://fakestoreapi.com/products');
@@ -12,6 +21,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+    /**
+   * Muestra los productos en el contenedor principal.
+   * @param {Array<Object>} products - Lista de productos obtenidos.
+   */
   const displayProducts = (products) => {
     products.forEach(product => {
       const card = document.createElement('div');
@@ -32,6 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+    /**
+   * Abre el modal con los detalles de un producto específico.
+   * @param {Event} event - Evento de clic del botón Detalle.
+   * @async
+   */
   const openModal = async (event) => {
     const productId = event.target.dataset.productId;
     try {
@@ -43,6 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  /**
+   * Muestra un modal con los detalles del producto.
+   * @param {Object} product - Producto con información completa.
+   */
   const displayModal = (product) => {
     const modal = document.createElement('div');
     modal.classList.add('product-modal');
@@ -70,6 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+    /**
+   * Agrega un producto al carrito y lo guarda en localStorage.
+   * @param {Object} product - Producto a agregar.
+   */
   const addToCart = (product) => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     product.quantity = 1;
@@ -97,6 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartTotal();
   });
 
+
+  /**
+   * Muestra los productos actualmente en el carrito.
+   */
   const displayCartItems = () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     cartItemsContainer.innerHTML = '';
@@ -141,6 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+    /**
+   * Actualiza la cantidad de un producto en el carrito.
+   * @param {string} productId - ID del producto.
+   * @param {number} change - Cambio en la cantidad (+1 o -1).
+   */
   const updateQuantity = (productId, change) => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const productIndex = cart.findIndex(product => product.id == productId);
@@ -158,6 +193,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+    /**
+   * Actualiza la cantidad de un producto en el carrito.
+   * @param {string} productId - ID del producto.
+   * @param {number} change - Cambio en la cantidad (+1 o -1).
+   */
   const deleteProduct = (productId) => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     const productIndex = cart.findIndex(product => product.id == productId);
@@ -170,6 +210,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+
+  /**
+   * Calcula y muestra el total del carrito.
+   */
   const updateCartTotal = () => {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let total = 0;
@@ -182,12 +226,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   fetchProducts();
 
-  // Finalizar Compra button functionality
+  // Finalizar Compra
   const finalizarCompraBtn = document.getElementById('finalizar-compra-btn');
   if (finalizarCompraBtn) {
     finalizarCompraBtn.addEventListener('click', finalizarCompra);
   }
 
+  /**
+   * Finaliza la compra, limpia el carrito y muestra un mensaje.
+   */
   function finalizarCompra() {
     localStorage.removeItem('cart');
     cartItemsContainer.innerHTML = '<p>No items in cart.</p>';
@@ -201,6 +248,10 @@ document.addEventListener('DOMContentLoaded', () => {
     eliminarCarritoBtn.addEventListener('click', eliminarCarrito);
   }
 
+
+  /**
+   * Elimina todo el contenido del carrito sin finalizar la compra.
+   */
   function eliminarCarrito() {
     localStorage.removeItem('cart');
     cartItemsContainer.innerHTML = '<p>No items in cart.</p>';
@@ -211,6 +262,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('inputSearch');
   searchInput.addEventListener('input', searchProducts);
 
+    /**
+   * Filtra los productos mostrados según el texto de búsqueda ingresado.
+   */
   function searchProducts() {
     const searchTerm = searchInput.value.toLowerCase();
     const productsContainer = document.getElementById('products-container');
